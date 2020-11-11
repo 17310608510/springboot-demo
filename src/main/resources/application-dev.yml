@@ -1,0 +1,55 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /swagger2
+######################################################
+logging:
+  config: classpath:log4j2-boot-pro.xml
+###############################################
+spring:
+  #--------------------#jpa---------------------
+  datasource:
+    url: jdbc:mysql://localhost:3306/data_jpa?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  #------------------------------------------
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  #------------------------------------------
+  servlet:
+    multipart:
+      #上传文件单个限制
+      max-file-size: 100MB
+      #总限制
+      max-request-size: 100MB
+      #启用
+      enabled: true
+  #----------------------redis
+  redis:
+       host: 127.0.0.1
+       port: 6379
+       password: 
+       #超时连接
+       timeout: 1000ms
+       jedis:
+         pool:
+           #最大连接数据库连接数,设 0 为没有限制
+           max-active: 8
+           #最大等待连接中的数量,设 0 为没有限制
+           max-idle: 8
+           #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+           max-wait: -1ms
+           #最小等待连接中的数量,设 0 为没有限制
+           min-idle: 0
